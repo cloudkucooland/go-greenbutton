@@ -7,7 +7,7 @@ import (
 
 // EnergyReading is the clean output
 type EnergyReading struct {
-	Start    time.Time
+	Start time.Time
 	// Duration time.Duration
 	Value    float64
 	IsExport bool
@@ -38,9 +38,9 @@ func (s *parseState) applyMeta(r EnergyReading, meta ReadingType) EnergyReading 
 	// Apply scale (PowerOfTenMultiplier) and detect flow
 	// Flow 19 = Export/Surplus, Flow 1 = Import/Consumption
 	r.IsExport = (meta.FlowDirection == 19)
-	
-	// SMT often uses PowerOfTenMultiplier -3 (1234 -> 1.234 kWh) 
-	// or 0 (1234 -> 1234 Wh). 
+
+	// SMT often uses PowerOfTenMultiplier -3 (1234 -> 1.234 kWh)
+	// or 0 (1234 -> 1234 Wh).
 	// Let's assume the value is in Wh for consistency.
 	return r
 }
