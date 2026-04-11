@@ -1,0 +1,8 @@
+[
+  {
+    "Name": "Almika 60 Energy Plus Buyback",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 14.5, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 10.0 },
+    "Netting": { "NoNetExport": false }
+  }
+]
