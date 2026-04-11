@@ -1,0 +1,72 @@
+[
+  {
+    "Name": "TXU Solar Buyback Match (1:1 Energy)",
+    "Base": 1495,
+    "ImportKwh": 12.8,
+    "ExportKwh": 12.8,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "Best-in-class for Oncor. 1:1 credit on energy, but TDU fees apply to all imports."
+  },
+  {
+    "Name": "Reliant Solar Payback Match (Wholesale)",
+    "Base": 999,
+    "ImportKwh": 11.8,
+    "ExportKwh": 3.0,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "Credits exports at Real-Time Wholesale (RTW) rates. 3.0c is the historical average."
+  },
+  {
+    "Name": "Gexa Solar Export Saver",
+    "Base": 995,
+    "ImportKwh": 8.9,
+    "ExportKwh": 3.0,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "Low import rate. Good for homes with high night usage or smaller solar arrays."
+  },
+  {
+    "Name": "Chariot GreenVolt (Fixed High)",
+    "Base": 2995,
+    "ImportKwh": 11.2,
+    "ExportKwh": 7.0,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "High fixed base fee, but a strong 7c fixed export credit."
+  },
+  {
+    "Name": "Almika 60 Energy Plus",
+    "Base": 1495,
+    "ImportKwh": 14.5,
+    "ExportKwh": 10.0,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "Highest fixed export rate (10c) currently available, requires a 5-year commitment."
+  },
+  {
+    "Name": "Tesla TE Fixed (Battery Required)",
+    "Base": 0,
+    "ImportKwh": 11.7,
+    "ExportKwh": 5.0,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "Requires Powerwall. Consistent rates for solar-plus-storage owners."
+  },
+  {
+    "Name": "Pulse Power 100% Solar Buyback",
+    "Base": 0,
+    "ImportKwh": 18.2,
+    "ExportKwh": 18.2,
+    "TDUBase": 423,
+    "TDUKwh": 5.6183,
+    "MaxKwhNet": -1,
+    "Comment": "True 1:1 energy match, but with a significantly higher base energy rate."
+  }
+]
