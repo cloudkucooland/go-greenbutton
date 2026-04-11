@@ -1,72 +1,257 @@
 [
   {
-    "Name": "TXU Solar Buyback Match (1:1 Energy)",
-    "Base": 1495,
-    "ImportKwh": 12.8,
-    "ExportKwh": 12.8,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "Best-in-class for Oncor. 1:1 credit on energy, but TDU fees apply to all imports."
+    "Name": "Almika 60 Energy Plus Buyback",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 14.5, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 10.0 },
+    "Netting": { "NoNetExport": false }
   },
   {
-    "Name": "Reliant Solar Payback Match (Wholesale)",
-    "Base": 999,
-    "ImportKwh": 11.8,
-    "ExportKwh": 3.0,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "Credits exports at Real-Time Wholesale (RTW) rates. 3.0c is the historical average."
+    "Name": "Ambit Texas Solar Buyback",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 12.6, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.5 },
+    "Netting": { "NoNetExport": false }
   },
   {
-    "Name": "Gexa Solar Export Saver",
-    "Base": 995,
-    "ImportKwh": 8.9,
-    "ExportKwh": 3.0,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "Low import rate. Good for homes with high night usage or smaller solar arrays."
+    "Name": "Atlantex Glow Solar",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 7.0, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": true }
   },
   {
-    "Name": "Chariot GreenVolt (Fixed High)",
-    "Base": 2995,
-    "ImportKwh": 11.2,
-    "ExportKwh": 7.0,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "High fixed base fee, but a strong 7c fixed export credit."
+    "Name": "Atma Solar 1:1 Buyback",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 22.6, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "netting", "FixedRate": 22.6 },
+    "Netting": { "Mode": "instant", "NoNetExport": false }
   },
   {
-    "Name": "Almika 60 Energy Plus",
-    "Base": 1495,
-    "ImportKwh": 14.5,
-    "ExportKwh": 10.0,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "Highest fixed export rate (10c) currently available, requires a 5-year commitment."
+    "Name": "Atma Solar Buyback Saver",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 10.4, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
   },
   {
-    "Name": "Tesla TE Fixed (Battery Required)",
-    "Base": 0,
-    "ImportKwh": 11.7,
-    "ExportKwh": 5.0,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "Requires Powerwall. Consistent rates for solar-plus-storage owners."
+    "Name": "Champion Champ Saver",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 7.6, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
   },
   {
-    "Name": "Pulse Power 100% Solar Buyback",
-    "Base": 0,
-    "ImportKwh": 18.2,
-    "ExportKwh": 18.2,
-    "TDUBase": 423,
-    "TDUKwh": 5.6183,
-    "MaxKwhNet": -1,
-    "Comment": "True 1:1 energy match, but with a significantly higher base energy rate."
+    "Name": "Champion Free Weekends",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 12.1, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "TOU": {
+      "Enabled": true,
+      "Periods": [
+        { "Name": "Weekend", "StartTime": "00:00", "EndTime": "23:59", "ImportRate": 0.0, "ExportRate": 0.0, "Days": ["Saturday", "Sunday"] }
+      ]
+    },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Chariot Fusion",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 9.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": true }
+  },
+  {
+    "Name": "Chariot GreenVolt",
+    "Charges": { "BaseCents": 2995, "ImportCentsPerKWh": 10.2, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 7.0 },
+    "Netting": { "NoNetExport": true }
+  },
+  {
+    "Name": "Chariot PowerBank",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 9.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": true }
+  },
+  {
+    "Name": "Chariot Shine",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 8.5, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "David Smart Battery",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 9.8, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Direct Solar Unlimited",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 10.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 5.3 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Frontier Battery Awards",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 8.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Frontier Sun Confidence",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 8.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Gexa Battery Benefits",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 8.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Gexa Solar Buyback",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 8.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "GoodLeap Solar Buyback",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 28.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "netting", "FixedRate": 28.9 },
+    "Netting": { "Mode": "instant", "NoNetExport": false }
+  },
+  {
+    "Name": "Green Mountain Renewable Rewards",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 16.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 16.9 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Green Mountain RR Solar Credit",
+    "Charges": { "BaseCents": 2995, "ImportCentsPerKWh": 11.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 6.3 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Green Mountain RR Solar Max",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 11.4, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Meter Earner",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 12.7, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 8.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Meter Earner + Battery",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 12.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 8.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Meter Saver",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 11.0, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Meter Saver + Battery",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 10.5, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Meter Secure",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 7.0, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Octopus Octo Green",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 6.5, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Otovo Solar BuyBack",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 12.7, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 8.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Otovo Solar Buyback Match",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 19.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "netting", "FixedRate": 19.3 },
+    "Netting": { "Mode": "instant", "NoNetExport": false }
+  },
+  {
+    "Name": "Reliant Solar Payback Match",
+    "Charges": { "BaseCents": 999, "ImportCentsPerKWh": 11.6, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Reliant Solar Payback Plus",
+    "Charges": { "BaseCents": 2995, "ImportCentsPerKWh": 11.3, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 6.3 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Rhythm PowerShift Solar BB",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 18.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "TOU": {
+      "Enabled": true,
+      "Periods": [
+        { "Name": "Peak", "StartTime": "19:00", "EndTime": "22:00", "ImportRate": 35.7, "ExportRate": 21.4 },
+        { "Name": "Shoulder", "StartTime": "06:00", "EndTime": "09:00", "ImportRate": 18.9, "ExportRate": 11.4 },
+        { "Name": "Shoulder-PM", "StartTime": "16:00", "EndTime": "19:00", "ImportRate": 18.9, "ExportRate": 11.4 },
+        { "Name": "Off-Peak", "StartTime": "00:00", "EndTime": "06:00", "ImportRate": 4.1, "ExportRate": 2.5 }
+      ]
+    },
+    "Export": { "Model": "fixed", "FixedRate": 11.4 },
+    "Netting": { "NoNetExport": true }
+  },
+  {
+    "Name": "TXSolarPro TexasSolar.Pro Plan",
+    "Charges": { "BaseCents": 1995, "ImportCentsPerKWh": 24.8, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "netting", "FixedRate": 24.8 },
+    "Netting": { "Mode": "instant", "NoNetExport": false }
+  },
+  {
+    "Name": "TXU Solar Buyback Plus",
+    "Charges": { "BaseCents": 1495, "ImportCentsPerKWh": 12.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 6.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "TXU Solar Buyback Saver",
+    "Charges": { "BaseCents": 995, "ImportCentsPerKWh": 11.9, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.5 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Tesla TE Drive Plan",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 10.0, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "Export": { "Model": "fixed", "FixedRate": 3.0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Tesla TE Dynamic Plan",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 12.7, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "TOU": {
+      "Enabled": true,
+      "Periods": [
+        { "Name": "Peak", "StartTime": "18:00", "EndTime": "21:00", "ImportRate": 12.7, "ExportRate": 0.0 }
+      ]
+    },
+    "Export": { "Model": "wholesale", "FixedRate": 0 },
+    "Netting": { "NoNetExport": false }
+  },
+  {
+    "Name": "Tesla TE Fixed Plan",
+    "Charges": { "BaseCents": 0, "ImportCentsPerKWh": 11.7, "TDUCentsPerKWh": 4.54, "TDUBaseCents": 0 },
+    "TOU": {
+      "Enabled": true,
+      "Periods": [
+        { "Name": "Off-Peak", "StartTime": "00:00", "EndTime": "04:00", "ImportRate": 6.7, "ExportRate": 5.0 }
+      ]
+    },
+    "Export": { "Model": "fixed", "FixedRate": 5.0 },
+    "Netting": { "NoNetExport": false }
   }
 ]
