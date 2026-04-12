@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	// "sync"
 
 	"github.com/cloudkucooland/go-greenbutton"
 	"github.com/urfave/cli/v3"
@@ -52,11 +53,10 @@ func main() {
 			}
 			sort.Strings(months)
 
+			// running each plan in a go improves performance about 5% -- not worth it
 			for _, p := range plans {
 				fmt.Printf("\n--- Plan: %s ---\n", p.Name)
-				fmt.Printf("%-8s | %-10s | %-10s | %-10s\n",
-					"Month", "Import", "Export", "Cost ($)",
-				)
+				fmt.Printf("%-8s | %-10s | %-10s | %-10s\n", "Month", "Import", "Export", "Cost ($)")
 
 				var makesTotalCents float64
 				for _, month := range months {

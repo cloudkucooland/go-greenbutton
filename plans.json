@@ -41,7 +41,7 @@
     "TOU": {
       "Enabled": true,
       "Periods": [
-        { "Name": "Weekend", "StartTime": "00:00", "EndTime": "23:59", "ImportRate": 0.0, "ExportRate": 0.0, "Days": ["Saturday", "Sunday"] }
+        { "Name": "Weekend", "Start": "00:00", "End": "23:59", "ImportRate": 0.0, "ExportRate": 0.0, "Days": ["Saturday", "Sunday"] }
       ]
     },
     "Export": { "Model": "wholesale", "FixedRate": 0 },
@@ -197,10 +197,10 @@
     "TOU": {
       "Enabled": true,
       "Periods": [
-        { "Name": "Peak", "StartTime": "19:00", "EndTime": "22:00", "ImportRate": 35.7, "ExportRate": 21.4 },
-        { "Name": "Shoulder", "StartTime": "06:00", "EndTime": "09:00", "ImportRate": 18.9, "ExportRate": 11.4 },
-        { "Name": "Shoulder-PM", "StartTime": "16:00", "EndTime": "19:00", "ImportRate": 18.9, "ExportRate": 11.4 },
-        { "Name": "Off-Peak", "StartTime": "00:00", "EndTime": "06:00", "ImportRate": 4.1, "ExportRate": 2.5 }
+        { "Name": "Peak", "Start": "19:00", "End": "22:00", "ImportRate": 35.7, "ExportRate": 21.4 },
+        { "Name": "Shoulder", "Start": "06:00", "End": "09:00", "ImportRate": 18.9, "ExportRate": 11.4 },
+        { "Name": "Shoulder-PM", "Start": "16:00", "End": "19:00", "ImportRate": 18.9, "ExportRate": 11.4 },
+        { "Name": "Off-Peak", "Start": "00:00", "End": "06:00", "ImportRate": 4.1, "ExportRate": 2.5 }
       ]
     },
     "Export": { "Model": "fixed", "FixedRate": 11.4 },
@@ -236,7 +236,7 @@
     "TOU": {
       "Enabled": true,
       "Periods": [
-        { "Name": "Peak", "StartTime": "18:00", "EndTime": "21:00", "ImportRate": 12.7, "ExportRate": 0.0 }
+        { "Name": "Peak", "Start": "18:00", "End": "21:00", "ImportRate": 12.7, "ExportRate": 0.0 }
       ]
     },
     "Export": { "Model": "wholesale", "FixedRate": 0 },
@@ -248,7 +248,7 @@
     "TOU": {
       "Enabled": true,
       "Periods": [
-        { "Name": "Off-Peak", "StartTime": "00:00", "EndTime": "04:00", "ImportRate": 6.7, "ExportRate": 5.0 }
+        { "Name": "Off-Peak", "Start": "00:00", "End": "04:00", "ImportRate": 6.7, "ExportRate": 5.0 }
       ]
     },
     "Export": { "Model": "fixed", "FixedRate": 5.0 },

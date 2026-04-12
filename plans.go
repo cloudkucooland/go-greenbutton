@@ -10,13 +10,22 @@ import (
 type Plan struct {
 	Name string
 
+	// for WebUI display
+	PlanURL     string
+	Provider    string
+	ProviderURL string
+	Details     string    // other information that might be helpful to the viewer
+	LastUpdated time.Time // last time this plan was reviewed for accuracy
+
+	// for WebUI determining which plans to display
+	ServiceArea string // "oncor" "centerpoint" etc
+
 	Charges Charges
 
 	Export struct {
 		Model ExportModel
 
 		FixedRate float64 // for ExportFixed
-		// wholesale handled separately later
 	}
 
 	Netting NettingRules
@@ -84,7 +93,7 @@ type TOUPeriod struct {
 }
 
 type BatteryRules struct {
-	Required            bool
+	Required            bool // does the plan require a battery
 	ExportOnlyFromSolar bool // Tesla-style restrictions
 }
 
