@@ -75,11 +75,11 @@ type TimeOfUse struct {
 }
 
 type TOUPeriod struct {
-	Name       string    `json:"name"`
-	ImportRate float64   `json:"import_rate"`
-	ExportRate float64   `json:"export_rate"`
-	Start      TimeOfDay `json:"start"` // "16:00" in JSON
-	End        TimeOfDay `json:"end"`   // "21:00" in JSON
+	Name       string
+	ImportRate float64
+	ExportRate float64
+	Start      TimeOfDay
+	End        TimeOfDay
 }
 
 type BatteryRules struct {

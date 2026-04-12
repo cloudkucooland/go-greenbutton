@@ -7,8 +7,7 @@ import (
 	"time"
 )
 
-// Smart Meter Texas format
-
+// Smart Meter Texas CSV format
 func ParseCSV(r io.Reader, callback func(EnergyReading)) error {
 	reader := csv.NewReader(r)
 	lines, err := reader.ReadAll()
@@ -21,12 +20,18 @@ func ParseCSV(r io.Reader, callback func(EnergyReading)) error {
 			continue
 		} // Skip header
 
-		// TODO we need to collapse the samples to 15-minute buckets since sometimes
-		// export is 09:15:01 and import is 09:15:02
+		// all sample data shows an even nn:[00|15|30|45]:00 time
 		start, err := time.Parse("01/02/2006 15:04", v[1]+" "+v[3])
 		if err != nil {
 			continue
 		}
+
+		// not currently used, for future work if we need more integration
+		end, err := time.Parse("01/02/2006 15:04", v[1]+" "+v[4])
+		if err != nil {
+			continue
+		}
+
 		val, err := strconv.ParseFloat(v[5], 64)
 		if err != nil {
 			continue
@@ -34,7 +39,8 @@ func ParseCSV(r io.Reader, callback func(EnergyReading)) error {
 
 		callback(EnergyReading{
 			Start:    start,
-			Value:    val * 1000, // Convert kWh to Wh for consistency
+			End:      end,
+			ValueKWh: val,
 			IsExport: v[7] == "Surplus Generation",
 		})
 	}

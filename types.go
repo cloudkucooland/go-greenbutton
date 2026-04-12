@@ -7,9 +7,9 @@ import (
 
 // EnergyReading is the clean output
 type EnergyReading struct {
-	Start time.Time
-	// Duration time.Duration
-	Value    float64
+	Start    time.Time
+	End      time.Time // set in SMT data
+	ValueKWh float64
 	IsExport bool
 }
 
@@ -35,13 +35,15 @@ func (s *parseState) flushBuffer(typeID string, callback func(EnergyReading)) {
 }
 
 func (s *parseState) applyMeta(r EnergyReading, meta ReadingType) EnergyReading {
-	// Apply scale (PowerOfTenMultiplier) and detect flow
 	// Flow 19 = Export/Surplus, Flow 1 = Import/Consumption
 	r.IsExport = (meta.FlowDirection == 19)
 
 	// SMT often uses PowerOfTenMultiplier -3 (1234 -> 1.234 kWh)
 	// or 0 (1234 -> 1234 Wh).
-	// Let's assume the value is in Wh for consistency.
+	if meta.PowerOfTenMultiplier == 0 {
+		r.ValueKWh = r.ValueKWh * 1000 // convert Wh to KWH
+	}
+	// if meta.PowerOfTenMultiplier == -3 { // no need }
 	return r
 }
 
@@ -49,8 +51,8 @@ func blockToReadings(block IntervalBlock) []EnergyReading {
 	var out []EnergyReading
 	for _, ir := range block.IntervalReading {
 		out = append(out, EnergyReading{
-			Start: time.Unix(ir.TimePeriod.Start, 0),
-			Value: float64(ir.Value),
+			Start:    time.Unix(ir.TimePeriod.Start, 0),
+			ValueKWh: float64(ir.Value),
 		})
 	}
 	return out
