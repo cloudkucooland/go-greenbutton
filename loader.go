@@ -1,6 +1,7 @@
 package greenbutton
 
 import (
+	"context"
 	"io"
 	"time"
 )
@@ -46,11 +47,21 @@ func Loader(f io.Reader, isCSV bool) (MonthlyMap, error) {
 	return monthly, nil
 }
 
-func (im IntervalMap) Sum(p Plan) (MonthlyBillInterval, float64) {
+func (im IntervalMap) Sum(ctx context.Context, p Plan) (MonthlyBillInterval, float64, error) {
 	bi := MonthlyBillInterval{0, 0, 0, 0, 0}
 	var monthlyCents float64
 
+	var skipper int
 	for k, iv := range im {
+		if skipper%96 == 0 {
+			select {
+			case <-ctx.Done():
+				return MonthlyBillInterval{}, 0, ctx.Err()
+			default:
+			}
+		}
+		skipper++
+
 		// keep physics correct
 		bi.Import += iv.Import
 		bi.Export += iv.Export
@@ -63,7 +74,7 @@ func (im IntervalMap) Sum(p Plan) (MonthlyBillInterval, float64) {
 
 	// monthly policy adjustments (caps, credits, etc.)
 	monthlyCents = p.ApplyMonthlyRules(bi)
-	return bi, monthlyCents
+	return bi, monthlyCents, nil
 }
 
 func (p Plan) ApplyMonthlyRules(monthly MonthlyBillInterval) float64 {

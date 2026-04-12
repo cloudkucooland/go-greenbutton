@@ -60,7 +60,7 @@ func main() {
 
 				var makesTotalCents float64
 				for _, month := range months {
-					mbi, monthlyCents := monthly[month].Sum(p)
+					mbi, monthlyCents, _ := monthly[month].Sum(context.Background(), p)
 					makesTotalCents += monthlyCents
 
 					fmt.Printf("%-8s | %10.1f | %10.1f | $%8.2f\n",

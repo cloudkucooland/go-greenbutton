@@ -80,6 +80,7 @@ type TOUPeriod struct {
 	ExportRate float64
 	Start      TimeOfDay
 	End        TimeOfDay
+	Days       []string // "Monday", "Tuesday", etc
 }
 
 type BatteryRules struct {
@@ -114,6 +115,20 @@ func (t *TimeOfDay) UnmarshalJSON(b []byte) error {
 }
 
 func (tp TOUPeriod) ActiveAt(t time.Time) bool {
+	if len(tp.Days) > 0 {
+		found := false
+		currentDay := t.Weekday().String() // "Saturday"
+		for _, d := range tp.Days {
+			if d == currentDay {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+
 	mins := t.Hour()*60 + t.Minute()
 	start := int(tp.Start)
 	end := int(tp.End)
