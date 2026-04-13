@@ -11,7 +11,7 @@ import (
 	"sort"
 	"strings"
 
-	// "golang.org/x/crypto/acme/autocert"
+	"golang.org/x/crypto/acme/autocert"
 
 	"github.com/cloudkucooland/go-greenbutton"
 	"github.com/urfave/cli/v3"
@@ -38,6 +38,16 @@ func main() {
 				Name:  "dir",
 				Value: "/home/gb",
 				Usage: "Working directory",
+			},
+			&cli.BoolFlag{
+				Name:  "https",
+				Value: false,
+				Usage: "Use autocert and HTTPS",
+			},
+			&cli.StringFlag{
+				Name:  "sslname",
+				Value: "www.example.com",
+				Usage: "hostname for ssl cert",
 			},
 		},
 
@@ -72,21 +82,23 @@ func startup(ctx context.Context, cmd *cli.Command) error {
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	slog.Info("Listening", "port", cmd.String("port"))
-	return http.ListenAndServe(cmd.String("port"), mux)
-
-	// do simple HTTPS using Acme cert - later in dev cycle, after getting external host online
-	/*
-	   m := &autocert.Manager{
-	       Cache:      autocert.DirCache(path.Join(workdir, "acme")),
-	       Prompt:     autocert.AcceptTOS,
-	       HostPolicy: autocert.HostWhitelist("julysun.store"),
-	   }
-	   s := &http.Server{
-	   Addr:      ":https",
-	       TLSConfig: m.TLSConfig(),
-	   }
-	   s.ListenAndServeTLS("", "")
-	*/
+	if !cmd.Bool("https") {
+		return http.ListenAndServe(cmd.String("port"), mux)
+	} else {
+		// I've not tested this since I'm using relayd
+		// do simple HTTPS using Acme cert - later in dev cycle, after getting external host online
+		m := &autocert.Manager{
+			Cache:      autocert.DirCache(path.Join(workdir, "acme")),
+			Prompt:     autocert.AcceptTOS,
+			HostPolicy: autocert.HostWhitelist(cmd.String("sslname")),
+		}
+		s := &http.Server{
+			Addr:      ":https",
+			TLSConfig: m.TLSConfig(),
+			// Mux: mux,
+		}
+		return s.ListenAndServeTLS("", "")
+	}
 }
 
 func jsonError(e error) string {
@@ -118,17 +130,14 @@ func (s *Server) handleUpload(w http.ResponseWriter, r *http.Request) {
 
 	file, header, err := r.FormFile("d")
 	if err != nil {
-		fmt.Printf("%+v\n", r.PostForm["d"])
 		slog.Error("error retrieving data", "error", err)
 		http.Error(w, "Error retrieving the file", http.StatusBadRequest)
 		return
 	}
 	defer file.Close()
 
-	slog.Info("DEBUG", "filename", header.Filename, "header", header.Header)
-
 	isCSV := false
-	if strings.HasSuffix(header.Filename, ".csv") {
+	if strings.HasSuffix(strings.ToLower(header.Filename), ".csv") {
 		isCSV = true
 	}
 
