@@ -15,7 +15,7 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetch('http://chorus.local:8090/plans');
+			const res = await fetch('/plans');
 			plans = await res.json();
 		} catch (e) {
 			error = 'Failed to load plans from server.';
@@ -31,7 +31,7 @@
 		formData.append('d', sf[0]);
 
 		try {
-			const response = await fetch('http://chorus.local:8090/upload', {
+			const response = await fetch('/upload', {
 				method: 'POST',
 				body: formData
 			});
