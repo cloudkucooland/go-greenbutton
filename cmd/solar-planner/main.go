@@ -126,7 +126,12 @@ func (s *Server) handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 12MB max (2 years, max allowed export from SMT)
-	r.ParseMultipartForm(12 << 20)
+    err := r.ParseMultipartForm(12 << 20)
+    if err != nil {
+		slog.Error("error parsing form data", "error", err)
+		http.Error(w, "Error parsing form data", http.StatusBadRequest)
+		return
+    }
 
 	file, header, err := r.FormFile("d")
 	if err != nil {
