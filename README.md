@@ -1,3 +1,6 @@
+[![GoReportCard](https://goreportcard.com/badge/cloudkucooland/go-greenbutton)](https://goreportcard.com/report/cloudkucooland/go-greenbutton)
+[![GoDoc](https://godoc.org/github.com/cloudkucooland/go-greenbutton?status.svg)](https://godoc.org/github.com/cloudkucooland/go-greenbutton)
+
 # go-greenbutton
 Greenbutton / Smart Meter Texas data parser 
 
