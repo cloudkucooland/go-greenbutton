@@ -125,8 +125,7 @@ func (s *Server) handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 1MB for body is way more than enough
-	r.Body = http.MaxBytesReader(w, r.Body, 1<<20)
+	r.Body = http.MaxBytesReader(w, r.Body, 12<<20)
 
 	// 12MB max (2 years, max allowed export from SMT)
 	err := r.ParseMultipartForm(12 << 20)
