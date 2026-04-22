@@ -46,6 +46,52 @@ func TestStaticParse(t *testing.T) {
 	}
 }
 
+func TestCSVParse(t *testing.T) {
+	f, err := os.Open("tests/smt_sample.csv")
+	if err != nil {
+		t.Fatalf("failed to open csv: %v", err)
+	}
+	defer f.Close()
+
+	var importCount, exportCount int
+	err = ParseCSV(f, func(r EnergyReading) {
+		if r.IsExport {
+			exportCount++
+		} else {
+			importCount++
+		}
+	})
+
+	if err != nil {
+		t.Errorf("ParseCSV failed: %v", err)
+	}
+	if importCount != 2 {
+		t.Errorf("expected 2 import readings, got %d", importCount)
+	}
+	if exportCount != 1 {
+		t.Errorf("expected 1 export reading, got %d", exportCount)
+	}
+}
+
+func TestValidatePlans(t *testing.T) {
+	plans, err := LoadPlans("plans.json")
+	if err != nil {
+		t.Fatalf("failed to load plans: %v", err)
+	}
+
+	for _, p := range plans {
+		if p.Name == "" {
+			t.Errorf("plan has no name")
+		}
+		if p.Charges.ImportCentsPerKWh == 0 && (p.TOU == nil || !p.TOU.Enabled) {
+			t.Errorf("plan %s has 0 import rate and no TOU", p.Name)
+		}
+		if p.Export.Model == ExportFixed && p.Export.FixedRate == 0 {
+			t.Errorf("plan %s has fixed export model but 0 rate", p.Name)
+		}
+	}
+}
+
 func TestInstantNetting(t *testing.T) {
 	p := Plan{
 		Name:    "Instant 1:1 Test",

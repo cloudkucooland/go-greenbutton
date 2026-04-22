@@ -40,10 +40,9 @@ func (s *parseState) applyMeta(r EnergyReading, meta ReadingType) EnergyReading 
 
 	// SMT often uses PowerOfTenMultiplier -3 (1234 -> 1.234 kWh)
 	// or 0 (1234 -> 1234 Wh).
-	if meta.PowerOfTenMultiplier == 0 {
+	if meta.PowerOfTenMultiplier == 0 || meta.PowerOfTenMultiplier == -3 {
 		r.ValueKWh = r.ValueKWh / 1000 // convert Wh to KWH
 	}
-	// if meta.PowerOfTenMultiplier == -3 { // no need }
 	return r
 }
 
