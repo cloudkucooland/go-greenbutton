@@ -22,13 +22,14 @@
 		}
 	});
 
-	async function handleUpload(event) {
+	async function handleUpload() {
+		if (!selectedFiles || selectedFiles.length === 0) return;
+
 		loading = true;
 		error = '';
 
-		const sf = selectedFiles;
 		const formData = new FormData();
-		formData.append('d', sf[0]);
+		formData.append('d', selectedFiles[0]);
 
 		try {
 			const response = await fetch('/upload', {
@@ -36,10 +37,13 @@
 				body: formData
 			});
 
-			if (!response.ok) throw new Error(await response.text());
+			if (!response.ok) {
+				const errorText = await response.text();
+				throw new Error(errorText || 'Upload failed');
+			}
 			results = await response.json();
 		} catch (e) {
-			error = e.message;
+			error = e instanceof Error ? e.message : 'An unknown error occurred';
 		} finally {
 			loading = false;
 		}

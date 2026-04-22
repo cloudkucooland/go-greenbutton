@@ -19,6 +19,7 @@
 			pill={true}
 			color="light"
 			size="xs"
+			aria-label={isOpen ? 'Collapse warnings' : 'Expand warnings'}
 			class="border-none bg-transparent hover:bg-amber-100 dark:hover:bg-amber-800/50"
 			onclick={() => (isOpen = !isOpen)}
 		>
@@ -31,7 +32,7 @@
 	</div>
 
 	{#if isOpen}
-		<div class="animate-in fade-in mt-4 space-y-6 duration-300">
+		<div class="mt-4 space-y-6 transition-all duration-300">
 			<p class="text-sm text-gray-700 dark:text-gray-300">
 				This simulator is a community-driven tool in <strong>Alpha</strong>. While the math is based
 				on published EFL (Electricity Facts Label) data, utility rates change frequently.

@@ -11,17 +11,17 @@
 	import PlanInspector from './PlanInspector.svelte';
 	import MonthlyBreakdown from './MonthlyBreakdown.svelte';
 
-	// Svelte 5 Props
 	let { results, plans } = $props();
 	let selectedPlanName = $state(null);
 
 	// Derived state: Calculate yearly total and sort by cheapest first
-	let sortedResults = $derived(
-		results
+	const sortedResults = $derived.by(() => {
+		if (!results) return [];
+		
+		return results
 			.map((plan) => {
 				const totalCents = plan.Data.reduce((acc, month) => acc + month.Cents, 0);
-				// Normalize to yearly if data isn't exactly 12 months
-				const monthCount = plan.Data.length;
+				const monthCount = plan.Data.length || 1;
 				const projectedYearly = (totalCents / monthCount) * 12;
 
 				return {
@@ -31,15 +31,18 @@
 					isCredit: projectedYearly < 0
 				};
 			})
-			.sort((a, b) => a.projectedYearly - b.projectedYearly)
-	);
+			.sort((a, b) => a.projectedYearly - b.projectedYearly);
+	});
+
+	function togglePlan(name) {
+		selectedPlanName = selectedPlanName === name ? null : name;
+	}
 
 	function formatCurrency(cents) {
-		const dollars = cents / 100;
 		return new Intl.NumberFormat('en-US', {
 			style: 'currency',
 			currency: 'USD'
-		}).format(dollars);
+		}).format(cents / 100);
 	}
 </script>
 
@@ -53,12 +56,10 @@
 			<TableHeadCell>Status</TableHeadCell>
 		</TableHead>
 		<TableBody>
-			{#each sortedResults as plan, i}
+			{#each sortedResults as plan, i (plan.Name)}
 				<TableBodyRow
-					class="group"
-					onclick={() => {
-						selectedPlanName = plan.Name;
-					}}
+					class="cursor-pointer"
+					onclick={() => togglePlan(plan.Name)}
 				>
 					<TableBodyCell class="font-medium">
 						{i + 1}

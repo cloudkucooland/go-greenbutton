@@ -9,9 +9,8 @@
 	} from 'flowbite-svelte';
 	let { monthlyData } = $props();
 
-	function format(cents) {
-		return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-	}
+	const format = (cents) =>
+		(cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 </script>
 
 <div class="rounded-xl bg-gray-50 p-4 dark:bg-gray-900">
